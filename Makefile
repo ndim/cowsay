@@ -13,6 +13,7 @@ mandir=${datarootdir}/man
 
 pkgdatadir = ${datadir}/${PACKAGE_TARNAME}
 cowsdir = ${pkgdatadir}/cows
+sitecowsdir = ${pkgdatadir}/site-cows
 
 srcdir = .
 
@@ -51,7 +52,7 @@ install: cowsay.1
 	$(INSTALL_DATA) cowthink.1 $(DESTDIR)$(mandir)/man1
 	$(INSTALL) -d $(DESTDIR)$(pkgdatadir)
 	cp -R share/cows $(DESTDIR)$(pkgdatadir)
-	$(INSTALL) -d $(DESTDIR)$(pkgdatadir)/site-cows
+	$(INSTALL) -d $(DESTDIR)$(sitecowsdir)
 
 uninstall:
 	rm -f $(DESTDIR)$(bindir)/cowsay $(DESTDIR)$(bindir)/cowthink
