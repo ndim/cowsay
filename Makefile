@@ -23,6 +23,12 @@ INSTALL_PROGRAM = $(INSTALL)
 INSTALL_DATA = ${INSTALL} -m 644
 LN = ln
 
+# If you implement support for *.pm cows, add share/cows/*.pm here.
+#
+# Note that this is a list of shell globs to be evaluated by the
+# shell, not a list of files to be evaluated by make.
+COW_FILES = share/cows/*.cow
+
 .PHONY: clean man install uninstall
 
 clean:
@@ -51,7 +57,7 @@ install: cowsay.1
 	$(INSTALL_DATA) cowsay.1 $(DESTDIR)$(mandir)/man1
 	$(INSTALL_DATA) cowthink.1 $(DESTDIR)$(mandir)/man1
 	$(INSTALL) -d $(DESTDIR)$(cowsdir)
-	$(INSTALL_DATA) share/cows/* $(DESTDIR)$(cowsdir)
+	$(INSTALL_DATA) $(COW_FILES) $(DESTDIR)$(cowsdir)
 	$(INSTALL) -d $(DESTDIR)$(sitecowsdir)
 
 uninstall:
