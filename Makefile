@@ -17,6 +17,7 @@ sitecowsdir = ${pkgdatadir}/site-cows
 
 srcdir = .
 
+A2X = a2x
 SHELL = /bin/sh
 INSTALL = install
 INSTALL_PROGRAM = $(INSTALL)
@@ -51,7 +52,7 @@ clean:
 man: cowsay.1
 
 cowsay.1: cowsay.1.adoc
-	a2x --format manpage ./cowsay.1.adoc
+	$(A2X) --format manpage ./cowsay.1.adoc
 
 install: man
 	$(INSTALL_DIR) $(DESTDIR)$(bindir)
