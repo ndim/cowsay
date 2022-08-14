@@ -10,6 +10,10 @@ datadir = ${datarootdir}
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 sysconfdir = ${prefix}/etc
 mandir=${datarootdir}/man
+
+pkgdatadir = ${datadir}/${PACKAGE_TARNAME}
+cowsdir = ${pkgdatadir}/cows
+
 srcdir = .
 
 SHELL = /bin/sh
@@ -52,4 +56,4 @@ install: cowsay.1
 uninstall:
 	rm -f $(DESTDIR)$(bindir)/cowsay $(DESTDIR)$(bindir)/cowthink
 	rm -f $(DESTDIR)$(mandir)/man1/cowsay.1 $(DESTDIR)$(mandir)/man1/cowthink.1
-	rm -rf $(DESTDIR)$(datadir)/cows
+	rm -rf $(DESTDIR)$(cowsdir)
