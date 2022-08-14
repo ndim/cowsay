@@ -50,8 +50,8 @@ install: cowsay.1
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man1
 	$(INSTALL_DATA) cowsay.1 $(DESTDIR)$(mandir)/man1
 	$(INSTALL_DATA) cowthink.1 $(DESTDIR)$(mandir)/man1
-	$(INSTALL) -d $(DESTDIR)$(pkgdatadir)
-	cp -R share/cows $(DESTDIR)$(pkgdatadir)
+	$(INSTALL) -d $(DESTDIR)$(cowsdir)
+	$(INSTALL_DATA) share/cows/* $(DESTDIR)$(cowsdir)
 	$(INSTALL) -d $(DESTDIR)$(sitecowsdir)
 
 uninstall:
