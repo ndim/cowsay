@@ -21,6 +21,7 @@ SHELL = /bin/sh
 INSTALL = install
 INSTALL_PROGRAM = $(INSTALL)
 INSTALL_DATA = ${INSTALL} -m 644
+INSTALL_DIR = $(INSTALL) -d
 LN = ln
 
 # If you implement support for *.pm cows, add share/cows/*.pm here.
@@ -49,16 +50,16 @@ cowsay.1: cowsay.1.adoc
 	a2x --format manpage ./cowsay.1.adoc
 
 install: cowsay.1
-	$(INSTALL) -d $(DESTDIR)$(prefix)
-	$(INSTALL) -d $(DESTDIR)$(bindir)
+	$(INSTALL_DIR) $(DESTDIR)$(bindir)
 	$(INSTALL_PROGRAM) cowsay $(DESTDIR)$(bindir)/cowsay
 	$(LN) -s cowsay $(DESTDIR)$(bindir)/cowthink
-	$(INSTALL) -d $(DESTDIR)$(mandir)/man1
-	$(INSTALL_DATA) cowsay.1 $(DESTDIR)$(mandir)/man1
+	$(INSTALL_DIR) $(DESTDIR)$(mandir)/man1
+	$(INSTALL_DATA) cowsay.1   $(DESTDIR)$(mandir)/man1
 	$(INSTALL_DATA) cowthink.1 $(DESTDIR)$(mandir)/man1
-	$(INSTALL) -d $(DESTDIR)$(cowsdir)
+	$(INSTALL_DIR) $(DESTDIR)$(pkgdatadir)
+	$(INSTALL_DIR) $(DESTDIR)$(cowsdir)
 	$(INSTALL_DATA) $(COW_FILES) $(DESTDIR)$(cowsdir)
-	$(INSTALL) -d $(DESTDIR)$(sitecowsdir)
+	$(INSTALL_DIR) $(DESTDIR)$(sitecowsdir)
 
 uninstall:
 	rm -f $(DESTDIR)$(bindir)/cowsay $(DESTDIR)$(bindir)/cowthink
