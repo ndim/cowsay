@@ -52,6 +52,7 @@ cowsay.1: cowsay.1.adoc
 install: cowsay.1
 	$(INSTALL_DIR) $(DESTDIR)$(bindir)
 	$(INSTALL_PROGRAM) cowsay $(DESTDIR)$(bindir)/cowsay
+	rm -f $(DESTDIR)$(bindir)/cowthink
 	$(LN) -s cowsay $(DESTDIR)$(bindir)/cowthink
 	$(INSTALL_DIR) $(DESTDIR)$(mandir)/man1
 	$(INSTALL_DATA) cowsay.1   $(DESTDIR)$(mandir)/man1
@@ -64,4 +65,4 @@ install: cowsay.1
 uninstall:
 	rm -f $(DESTDIR)$(bindir)/cowsay $(DESTDIR)$(bindir)/cowthink
 	rm -f $(DESTDIR)$(mandir)/man1/cowsay.1 $(DESTDIR)$(mandir)/man1/cowthink.1
-	rm -rf $(DESTDIR)$(cowsdir)
+	@set -e; for cow in $(COW_FILES); do dcow="$(DESTDIR)$(cowsdir)/$$(basename "$$cow")"; if test -f "$$dcow"; then echo "rm -f $$dcow"; rm -f "$$dcow"; fi; done
