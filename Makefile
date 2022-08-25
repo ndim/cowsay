@@ -31,6 +31,9 @@ LN_S = $(LN) -s
 # shell, not a list of files to be evaluated by make.
 COW_FILES = share/cows/*.cow
 
+.PHONY: all
+all: man
+
 .PHONY: clean man install uninstall
 
 clean:
@@ -50,7 +53,7 @@ man: cowsay.1
 cowsay.1: cowsay.1.adoc
 	a2x --format manpage ./cowsay.1.adoc
 
-install: cowsay.1
+install: man
 	$(INSTALL_DIR) $(DESTDIR)$(bindir)
 	$(INSTALL_PROGRAM) cowsay $(DESTDIR)$(bindir)/cowsay
 	rm -f $(DESTDIR)$(bindir)/cowthink
