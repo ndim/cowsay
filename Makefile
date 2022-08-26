@@ -22,7 +22,7 @@ srcdir = .
 
 A2X = a2x
 SHELL = /bin/sh
-INSTALL = install
+INSTALL = install -c
 INSTALL_PROGRAM = $(INSTALL)
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_DIR = $(INSTALL) -d
