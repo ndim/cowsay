@@ -15,6 +15,9 @@ pkgdatadir = ${datadir}/${PACKAGE_TARNAME}
 cowsdir = ${pkgdatadir}/cows
 sitecowsdir = ${pkgdatadir}/site-cows
 
+pkgsysconfdir = ${sysconfdir}/${PACKAGE_TARNAME}
+cowpathdir = ${pkgsysconfdir}/cowpath.d
+
 srcdir = .
 
 A2X = a2x
@@ -55,6 +58,7 @@ cowsay.1: cowsay.1.adoc
 	$(A2X) --format manpage ./cowsay.1.adoc
 
 install: man
+	$(INSTALL_DIR) $(DESTDIR)$(cowpathdir)
 	$(INSTALL_DIR) $(DESTDIR)$(bindir)
 	$(INSTALL_PROGRAM) cowsay $(DESTDIR)$(bindir)/cowsay
 	rm -f $(DESTDIR)$(bindir)/cowthink
@@ -72,4 +76,4 @@ uninstall:
 	rm -f $(DESTDIR)$(bindir)/cowsay $(DESTDIR)$(bindir)/cowthink
 	rm -f $(DESTDIR)$(mandir)/man1/cowsay.1 $(DESTDIR)$(mandir)/man1/cowthink.1
 	@set -e; for cow in $(COW_FILES); do dcow="$(DESTDIR)$(cowsdir)/$$(basename "$$cow")"; if test -f "$$dcow"; then echo "rm -f $$dcow"; rm -f "$$dcow"; fi; done
-	@set -e; for dir in $(cowsdir) $(sitecowsdir) $(pkgdatadir); do if test -d "$(DESTDIR)$${dir}"; then echo rmdir "$(DESTDIR)$${dir}"; rmdir "$(DESTDIR)$${dir}" ||:; fi; done
+	@set -e; for dir in $(cowsdir) $(sitecowsdir) $(pkgdatadir) $(cowpathdir) $(pkgsysconfdir); do if test -d "$(DESTDIR)$${dir}"; then echo rmdir "$(DESTDIR)$${dir}"; rmdir "$(DESTDIR)$${dir}" ||:; fi; done
