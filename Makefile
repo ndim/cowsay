@@ -23,6 +23,7 @@ INSTALL_PROGRAM = $(INSTALL)
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_DIR = $(INSTALL) -d
 LN = ln
+LN_S = $(LN) -s
 
 # If you implement support for *.pm cows, add share/cows/*.pm here.
 #
@@ -53,7 +54,7 @@ install: cowsay.1
 	$(INSTALL_DIR) $(DESTDIR)$(bindir)
 	$(INSTALL_PROGRAM) cowsay $(DESTDIR)$(bindir)/cowsay
 	rm -f $(DESTDIR)$(bindir)/cowthink
-	$(LN) -s cowsay $(DESTDIR)$(bindir)/cowthink
+	$(LN_S) cowsay $(DESTDIR)$(bindir)/cowthink
 	$(INSTALL_DIR) $(DESTDIR)$(mandir)/man1
 	$(INSTALL_DATA) cowsay.1 $(DESTDIR)$(mandir)/man1/cowsay.1
 	$(INSTALL_DATA) cowthink.1 $(DESTDIR)$(mandir)/man1/cowthink.1
