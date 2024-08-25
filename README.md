@@ -36,7 +36,7 @@ Note that this `cowsay-org` formula conflicts with the [`cowsay` formula from co
 
 ## License
 
-Cowsay is licensed under the GPLv3. See [LICENSE.txt](LICENSE.txt) for details.
+Cowsay is licensed under the [GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.en.html). See [LICENSE.txt](LICENSE.txt) for details.
 
 ## History
 
