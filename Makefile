@@ -40,6 +40,7 @@ WC = wc
 
 doc_DATA =
 doc_DATA += CHANGELOG.md
+doc_DATA += CONTRIBUTORS.md
 doc_DATA += LICENSE.txt
 doc_DATA += README.md
 
