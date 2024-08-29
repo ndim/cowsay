@@ -44,6 +44,14 @@ doc_DATA += CONTRIBUTORS.md
 doc_DATA += LICENSE.txt
 doc_DATA += README.md
 
+nobase_doc_DATA =
+# nobase_doc_DATA += "doc-project/Developer Notes.md"
+nobase_doc_DATA += doc-project/Licensing.md
+nobase_doc_DATA += "doc-project/Other Ranches.md"
+# nobase_doc_DATA += doc-project/Packaging.md
+nobase_doc_DATA += doc-project/README.md
+# nobase_doc_DATA += "doc-project/Release Checklist.md"
+
 # If you implement support for *.pm cows, add share/cows/*.pm here.
 #
 # Note that this is a list of shell globs to be evaluated by the shell, not a list of
@@ -107,6 +115,11 @@ man/man1/cowsay.1: man-src/man1/cowsay.1.adoc man-src/normalize-manpage.sed
 install:
 	$(INSTALL_DIR) $(DESTDIR)$(docdir)
 	$(INSTALL_DATA) $(doc_DATA) $(DESTDIR)$(docdir)
+	set -ex; for f in $(nobase_doc_DATA); do \
+	  d="$$(dirname "$$f")"; \
+	  $(INSTALL_DIR) "$(DESTDIR)$(docdir)/$$d"; \
+	  $(INSTALL_DATA) "$$f" "$(DESTDIR)$(docdir)/$$f"; \
+	done
 	$(INSTALL_DIR) $(DESTDIR)$(cowpathdir)
 	$(INSTALL_DATA) etc/cowsay/cowpath.d/README.md $(DESTDIR)$(cowpathdir)
 	$(INSTALL_DIR) $(DESTDIR)$(bindir)
@@ -148,6 +161,12 @@ uninstall:
 	    rm -f "$$df"; \
 	  fi; \
 	done
+	@set -e; for f in $(nobase_doc_DATA); do \
+	  if test -f "$(DESTDIR)$(docdir)/$$f"; then \
+	    echo "rm -f \"$(docdir)/$$f\""; \
+	    rm -f "$(DESTDIR)$(docdir)/$$f"; \
+	  fi; \
+	done
 	@set -e; \
 	for cow in $(COW_FILES); do \
 	  dcow="$(DESTDIR)$(cowsdir)/$$(basename "$$cow")"; \
@@ -157,7 +176,7 @@ uninstall:
 	  fi; \
 	done
 	@set -e; \
-	for dir in $(docdir) $(cowsdir) $(sitecowsdir) $(pkgdatadir) $(cowpathdir) $(pkgsysconfdir); do \
+	for dir in $(docdir)/doc-project $(docdir) $(cowsdir) $(sitecowsdir) $(pkgdatadir) $(cowpathdir) $(pkgsysconfdir); do \
 	  $(PRINTF) "%s\n" "$$dir"; \
 	done \
 	| $(AWK) '{ print length, $$0 }' | $(SORT) -n -r | $(CUT) -d" " -f2- \
